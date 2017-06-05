@@ -14,13 +14,20 @@ This script takes a csv list of names formatted "LastName, FirstName" and for ea
 |-|-|-|-|-|-|
 http://vocab.getty.edu/ulan/500009666|"Picasso, Pablo"|Spanish painter, sculptor, and printmaker, 1881-1973|Long-lived and very influential Spanish artist, active in France. He dominated 20th-century European art. With Georges Braque, he is credited with inventing Cubism.|Pablo Picasso;Picasso, Pablo Diego José Francisco de Paula Juan Nepomuceno Crispín Crispiniano de la Santissima Trinidad Ruiz Blasco;Picasso, Pablo Ruiz;Picasso, Pablo Ruiz y;Ruiz Picasso, Pablo;Ruiz y Picasso, Pablo;Ruiz, Pablo;Ruys Picasso, Pablo;Ruys, Pablo;Ruiz Y Picasso, Pablo;Picasso, Pablo Ruiz Y;Pablo Ruiz Y Picasso|ceramicists;artists;decorative artists;genre artists;painters;sculptors|
 
-It script borrows from [SFMoMA's](https://github.com/sfmoma/getty-getter) efforts along the same lines. However, we don't have ULAN ID numbers available so I'm using plain text (UTF-8!) names to query the ULAN [SPARQL](https://data-gov.tw.rpi.edu/wiki/How_to_use_SPARQL) endpoint. I found [Getty's query interface](http://vocab.getty.edu/queries#Finding_Subjects) more or less helpful in exploring the ULAN and other relevant ontologies... 
+It borrows from [SFMoMA's](https://github.com/sfmoma/getty-getter) efforts along the same lines and uses plain text (UTF-8!) names to query the ULAN [SPARQL](https://data-gov.tw.rpi.edu/wiki/How_to_use_SPARQL) endpoint. I found [Getty's query interface](http://vocab.getty.edu/queries#Finding_Subjects) more or less helpful in exploring the ULAN and other relevant ontologies... 
 
 #### Usage
 
 The data going in should be as clean as possible so I used a combination of [OpenRefine](http://openrefine.org/) and a text editor to get unique values, swap FirstName/LastName and so on. If the input csv isn't properly quoting each row then each name will fail.
 
-`cd` into the directory where you put the script. You'll want to change the relative paths of the input and output files (i.e., not '/samples/in.csv'). `python sparqlGetty.py` and see what comes out. 
+`cd` into the directory where you put the script. You'll want to change the relative paths of the input and output files (i.e., not '*/samples/in.csv'). `python sparqlGetty.py` and see what comes out. 
 
 Note that any non-disambiguated (undisambiguated? ambiguated?) names return multiple rows in the output csv, so it requires someone going through and figuring out which `Picasso, Pablo` you are talking about. Also, non-matches are ignored and there is no guarantee that a result is the one you are looking for (i.e. there could be a result for `Newman, Alfred E.`, but maybe the ULAN listed person is not the one you are looking for).
 
+#### Dependencies
+
+[SPARQLWRAPPER](https://rdflib.github.io/sparqlwrapper/)
+
+#### Rights
+
+This project contains information from Union List of Artist Names (ULAN)® which is made available under the ODC Attribution License.
